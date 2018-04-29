@@ -1,0 +1,116 @@
+﻿@model IEnumerable<BookingWebApp.ServiceReference.MeetingDTO>
+@{
+    ViewBag.Title = "Home Page";
+    DateTime startDate = (DateTime)TempData["startDate"];
+}
+
+<h2>Meetings</h2>
+
+<div class="topBarForm">
+    <form id="addForm" action="/Home/AddMeeting" method="post">
+        <input id="dateTime" name="dateTime" type="hidden" value="" />
+        <input type="submit" value="Book meeting" />
+    </form>
+</div>
+
+<div class="topBarForm">
+    <form id="removeForm" action="/Home/RemoveMeeting" method="post">
+        <input id="meetingId" name="meetingId" type="hidden" value="" />
+        <input type="submit" value="Remove meeting" />
+    </form>
+</div>
+<br /><br />
+
+<button>@Html.ActionLink("Previous week", "Index", "Home", new { weekStartDate = startDate.AddDays(-7).ToString() }, null)</button>
+<button>@Html.ActionLink("Next week", "Index", "Home", new { weekStartDate = startDate.AddDays(7).ToString() }, null)</button>
+
+<div class="divTable">
+    <div class="divTableBody">
+        <div class="divTableRow">
+            <div class="divTableCell"></div>
+
+            @for (int day = 0; day < 7; day++)
+            {
+                DateTime date = startDate.AddDays(day);
+                <div class="divTableCell">@date.DayOfWeek<br />@date.ToShortDateString()</div>
+            }
+        </div>
+
+        @for (int hour = 8; hour <= 16; hour++)
+        {
+            <div class="divTableRow">
+                <div class="divTableCell">@hour:00</div>
+
+                @for (int day = 0; day < 7; day++)
+                {
+                    DateTime date = startDate.AddDays(day);
+
+                    <div class="divTableCell selectable-cell">
+                        @{DateTime dateTime = new DateTime(date.Year, date.Month, date.Day, hour, 0, 0);}
+                        <input id="dateTime" type="hidden" value="@dateTime" />
+
+                        @foreach (var meeting in Model)
+                        {
+                            if (meeting.DateTime.Date == date.Date && meeting.DateTime.Hour == hour)
+                            {
+                                <input id="meetingId" type="hidden" value="@meeting.Id" />
+                                @meeting.Name
+                                break;
+                            }
+                        }
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</div>
+
+@Scripts.Render("~/bundles/jquery")
+<script>
+    $(document).ready(function () {
+        let dateTimeSelected = "";
+        let idSelected = "";
+
+        $(".selectable-cell").click(function () {
+            if ($(this).hasClass("highlight")) {
+                $(".highlight").removeClass("highlight");
+                dateTimeSelected = "";
+                idSelected = "";
+            } else {
+                $(".highlight").removeClass("highlight");
+                $(this).toggleClass("highlight");
+                dateTimeSelected = $(this).find("#dateTime").val();
+                idSelected = $(this).find("#meetingId").val();
+            }
+        });
+
+        $("#addForm").submit(function (e) {
+            if (dateTimeSelected !== "") {
+                if (idSelected === "" || idSelected === undefined) {
+                    $(this).find("#dateTime").val(dateTimeSelected);
+                    e.submit();
+                } else {
+                    e.preventDefault();
+                    alert("Another meeting is allready booked at that time!");
+                }
+            } else {
+                e.preventDefault();
+                alert("Please choose a date and a time!")
+            }
+        });
+
+        $("#removeForm").submit(function (e) {
+            if (idSelected !== "" && idSelected !== undefined) {
+                if (confirm("Are you sure you want to delete the meeting?")) {
+                    $(this).find("#meetingId").val(idSelected);
+                    e.submit();
+                } else {
+                    e.preventDefault();
+                }
+            } else {
+                e.preventDefault();
+                alert("No meeting selected!");
+            }
+        });
+    });
+</script>

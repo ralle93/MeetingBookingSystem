@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="9df305b8-440f-4d1f-bc22-1176d1fd70f4" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:2777/BookingService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="BookingService.xsd" MetadataType="Schema" ID="f3b14716-61bc-498b-abc9-b7e0d249bc55" SourceId="1" SourceUrl="http://localhost:2777/BookingService.svc?xsd=xsd0" />
+    <MetadataFile FileName="BookingService.wsdl" MetadataType="Wsdl" ID="fae91cbb-9869-4dcd-96a0-fd76062ad14e" SourceId="1" SourceUrl="http://localhost:2777/BookingService.svc?wsdl" />
+    <MetadataFile FileName="BookingService.disco" MetadataType="Disco" ID="07511010-dfac-48c5-8df6-f032f109426b" SourceId="1" SourceUrl="http://localhost:2777/BookingService.svc?disco" />
+    <MetadataFile FileName="BookingService1.xsd" MetadataType="Schema" ID="9966951d-fc85-4c12-bd07-ddb8d960b643" SourceId="1" SourceUrl="http://localhost:2777/BookingService.svc?xsd=xsd1" />
+    <MetadataFile FileName="BookingService2.xsd" MetadataType="Schema" ID="6105673e-dbe7-4f48-a07a-88220430afc4" SourceId="1" SourceUrl="http://localhost:2777/BookingService.svc?xsd=xsd2" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
