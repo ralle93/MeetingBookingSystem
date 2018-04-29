@@ -21,8 +21,14 @@
 </div>
 <br /><br />
 
-<button>@Html.ActionLink("Previous week", "Index", "Home", new { weekStartDate = startDate.AddDays(-7).ToString() }, null)</button>
-<button>@Html.ActionLink("Next week", "Index", "Home", new { weekStartDate = startDate.AddDays(7).ToString() }, null)</button>
+<button class="button-left">
+    @Html.ActionLink("Previous week", "Index", "Home", 
+    new { weekStartDate = startDate.AddDays(-7).ToString() }, new { @class = "link-button" })
+</button>
+<button class="button-right">
+    @Html.ActionLink("Next week", "Index", "Home", 
+    new { weekStartDate = startDate.AddDays(7).ToString() }, new { @class = "link-button" })
+</button>
 
 <div class="divTable">
     <div class="divTableBody">

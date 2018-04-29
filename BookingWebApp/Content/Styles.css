@@ -42,3 +42,32 @@
     float: left;
     padding-right: 5px;
 }
+
+.button-left {
+    float: left;
+}
+
+.button-right {
+    float: right;
+}
+
+.link-button {
+    color: black;
+    text-decoration: none;
+    cursor: default;
+}
+.link-button:active {
+    color: black;
+    text-decoration: none;
+    cursor: default;
+}
+.link-button:link {
+    color: black;
+    text-decoration: none;
+    cursor: default;
+}
+.link-button:visited {
+    color: black;
+    text-decoration: none;
+    cursor: default;
+}
