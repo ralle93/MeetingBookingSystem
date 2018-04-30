@@ -1,4 +1,13 @@
-﻿.divTable {
+﻿.header-container {
+    width: 100%;
+    text-align: center;
+}
+
+.header {
+    display: inline-block;
+}
+
+.divTable {
     display: table;
     width: 100%;
 }
@@ -34,8 +43,12 @@
     display: table-row-group;
 }
 
+.unselectable-cell {
+    background-color: lightgray;
+}
+
 .highlight {
-    background: #808080;
+    background-color: grey;
 }
 
 .topBarForm {

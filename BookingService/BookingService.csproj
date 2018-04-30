@@ -77,6 +77,8 @@
     </Compile>
     <Compile Include="DataContext.cs" />
     <Compile Include="IBookingService.cs" />
+    <Compile Include="Models\Meeting.cs" />
+    <Compile Include="Models\MeetingDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

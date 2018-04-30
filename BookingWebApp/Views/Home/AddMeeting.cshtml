@@ -1,26 +1,27 @@
 ﻿@model DateTime
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Book Meeting";
 }
 
-<h2>Book a new meeting:</h2><br />
+<h3>Book a new meeting:</h3>
 <div>
     Date: @Model.ToShortDateString() <br />
     Time: @Model.ToShortTimeString() <br />
 
     <form id="addForm" action="/Home/AddMeetingSubmit" method="post">
         <input name="dateTime" type="hidden" value="@Model" />
-        <input id="nameInput" name="name" type="text" value="" />
+        Name: <input id="nameInput" name="name" type="text" value="" /><br /><br />
         <input type="submit" value="Book meeting" />
     </form>
 
-    <h3>@Html.ActionLink("Cancel", "Index", "Home")</h3>
+    <button>@Html.ActionLink("Cancel", "Index", "Home", new { @class = "link-button" })</button>
 </div>
 
 @Scripts.Render("~/bundles/jquery")
 <script>
     $(document).ready(function () {
-        $("form").submit(function (e) {
+        $("#addForm").submit(function (e) {
             if ($(this).find("#nameInput").val() !== "") {
                 e.submit();
             } else {
@@ -28,5 +29,5 @@
                 alert("Please type a name for the meeting!");
             }
         });
-    }
+    });
 </script>

@@ -1,43 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
 using System.ServiceModel;
-using System.ServiceModel.Web;
-using System.Text;
+using BookingService.Models;
 
 namespace BookingService
 {
+    /// <summary>
+    /// Interface that defines the methods accessible for the WCF client.
+    /// </summary>
     [ServiceContract]
     public interface IBookingService
     {
+        /// <summary>
+        /// Get a list of meetings from the specified date and a week forward.
+        /// </summary>
+        /// <param name="startDate">Date and time to get meetings from.</param>
+        /// <returns>List of MeetingDTO objects.</returns>
         [OperationContract]
         List<MeetingDTO> GetWeekMeetings(DateTime startDate);
 
+        /// <summary>
+        /// Add a meeting to database.
+        /// </summary>
+        /// <param name="meeting">MeetingDTO object.</param>
+        /// <returns>Returns true if successfull.</returns>
         [OperationContract]
         bool AddMeeting(MeetingDTO meeting);
 
+        /// <summary>
+        /// Remove a meeting from the database.
+        /// </summary>
+        /// <param name="id">Meeting id.</param>
+        /// <returns>Returns true if successfull.</returns>
         [OperationContract]
         bool RemoveMeetingFromId(int id);
-    }
-
-    [DataContract]
-    public class MeetingDTO
-    {
-        public MeetingDTO() {}
-
-        public MeetingDTO(Meeting meeting)
-        {
-            this.Id = meeting.Id;
-            this.Name = meeting.Name;
-            this.DateTime = meeting.DateTime;
-        }
-
-        [DataMember]
-        public int Id { get; set; }
-        [DataMember]
-        public string Name { get; set; }
-        [DataMember]
-        public DateTime DateTime { get; set; }
     }
 }

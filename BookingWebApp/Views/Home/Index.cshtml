@@ -1,7 +1,9 @@
 ﻿@model IEnumerable<BookingWebApp.ServiceReference.MeetingDTO>
 @{
-    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Meetings";
     DateTime startDate = (DateTime)TempData["startDate"];
+    string errorMsg = (string)TempData["errorMsg"];
 }
 
 <h2>Meetings</h2>
@@ -15,6 +17,7 @@
 
 <div class="topBarForm">
     <form id="removeForm" action="/Home/RemoveMeeting" method="post">
+        <input id="dateTime" name="dateTime" type="hidden" value="" />
         <input id="meetingId" name="meetingId" type="hidden" value="" />
         <input type="submit" value="Remove meeting" />
     </form>
@@ -49,15 +52,23 @@
 
                 @for (int day = 0; day < 7; day++)
                 {
-                    DateTime date = startDate.AddDays(day);
+                    DateTime dateTime = startDate.AddDays(day).AddHours(hour);
 
-                    <div class="divTableCell selectable-cell">
-                        @{DateTime dateTime = new DateTime(date.Year, date.Month, date.Day, hour, 0, 0);}
+                    string divClass;
+                    if (dateTime >= DateTime.Now)
+                    {
+                        divClass = "selectable-cell";
+                    } else
+                    {
+                        divClass = "unselectable-cell";
+                    }
+
+                    <div class="divTableCell @divClass">
                         <input id="dateTime" type="hidden" value="@dateTime" />
 
                         @foreach (var meeting in Model)
                         {
-                            if (meeting.DateTime.Date == date.Date && meeting.DateTime.Hour == hour)
+                            if (meeting.DateTime.Date == dateTime.Date && meeting.DateTime.Hour == hour)
                             {
                                 <input id="meetingId" type="hidden" value="@meeting.Id" />
                                 @meeting.Name
@@ -108,6 +119,7 @@
         $("#removeForm").submit(function (e) {
             if (idSelected !== "" && idSelected !== undefined) {
                 if (confirm("Are you sure you want to delete the meeting?")) {
+                    $(this).find("#dateTime").val(dateTimeSelected);
                     $(this).find("#meetingId").val(idSelected);
                     e.submit();
                 } else {

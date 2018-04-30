@@ -1,33 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Data.Entity;
-using System.Linq;
-using System.Web;
+﻿using System.Data.Entity;
+using BookingService.Models;
 
 namespace BookingService
 {
+    /// <summary>
+    /// Class that defines the objects to save to tables in the database.
+    /// Is inherited from Entity Frameworks DbContext class.
+    /// </summary>
     public class DataContext : DbContext
     {
-        public DbSet<Meeting> Meetings { get; set; }
-    }
-
-    public class Meeting
-    {
-        public Meeting() {}
-
-        public Meeting(MeetingDTO meeting)
-        {
-            this.Id = meeting.Id;
-            this.Name = meeting.Name;
-            this.DateTime = meeting.DateTime;
-        }
-
-        [Key]
-        public int Id { get; set; }
-        [Required]
-        public string Name { get; set; }
-        [Required]
-        public DateTime DateTime { get; set; }
+        /// <summary>
+        /// Meetings table that stores Meeting objects.
+        /// </summary>
+        public virtual DbSet<Meeting> Meetings { get; set; }
     }
 }
